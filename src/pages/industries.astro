@@ -1,0 +1,58 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const industries = [
+  { name: 'IT (Software & Hardware)', icon: '💻', desc: 'Tech talent acquisition, IT compliance and scalable HR solutions for software and hardware companies.' },
+  { name: 'Logistics', icon: '🚚', desc: 'Workforce management, labour compliance and staffing solutions for the logistics and supply chain sector.' },
+  { name: 'E-Commerce', icon: '🛒', desc: 'Rapid scaling support, seasonal staffing and employee lifecycle management for e-commerce businesses.' },
+  { name: 'BFSI', icon: '🏦', desc: 'Regulatory compliance, background verification and specialized hiring for banking, financial services and insurance.' },
+  { name: 'Pharmacy', icon: '💊', desc: 'Compliance-focused HR solutions, statutory services and specialized recruitment for pharmaceutical companies.' },
+  { name: 'FMCG / FNCD', icon: '🛍️', desc: 'High-volume staffing, field force management and training programs for consumer goods companies.' },
+  { name: 'Healthcare / NGO', icon: '🏥', desc: 'Credentialing support, compliance services and mission-aligned hiring for healthcare and nonprofit organizations.' },
+  { name: 'Manufacturing', icon: '🏭', desc: 'Labour law compliance, workforce planning and safety training for manufacturing operations.' },
+  { name: 'Event Management', icon: '🎪', desc: 'Flexible staffing, contract workforce management and on-demand talent for events and hospitality.' },
+  { name: 'Customer Care / BPO', icon: '🎧', desc: 'Bulk hiring, attrition management, training programs and payroll services for BPO and customer support centers.' },
+];
+---
+
+<Layout title="Industries We Serve — BLU Consultant Services" description="BLU Consultant Services serves 10+ industries including IT, BFSI, Healthcare, Manufacturing, E-Commerce, Logistics and more across India.">
+  <Header />
+  <main id="main-content">
+    <!-- Page Header -->
+    <section class="pt-28 pb-6 bg-gradient-to-br from-primary-50 via-white to-accent-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span class="text-sm font-semibold tracking-wider uppercase text-primary-600">Industries</span>
+        <h1 class="mt-3 text-4xl sm:text-5xl font-extrabold text-gray-900">Industries We Serve</h1>
+        <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">Domain-specific HR expertise tailored to the unique challenges and requirements of your industry.</p>
+      </div>
+    </section>
+
+    <section class="pt-10 pb-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {industries.map((ind) => (
+            <div class="group p-6 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-xl hover:shadow-gray-100/50 hover:border-primary-100 transition-all duration-300">
+              <div class="text-4xl mb-4">{ind.icon}</div>
+              <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">{ind.name}</h3>
+              <p class="mt-2 text-gray-600 text-sm leading-relaxed">{ind.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <!-- CTA -->
+        <div class="mt-16 text-center">
+          <div class="inline-block p-8 rounded-2xl bg-gradient-to-r from-primary-50 to-accent-50 border border-primary-100">
+            <h3 class="text-xl font-bold text-gray-900">Don't see your industry?</h3>
+            <p class="mt-2 text-gray-600">Our solutions are adaptable. Contact us to discuss your specific needs.</p>
+            <a href="/contact" class="inline-block mt-4 px-6 py-2.5 rounded-lg bg-primary-600 text-white font-semibold hover:bg-primary-700 transition-colors">
+              Talk to Us
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

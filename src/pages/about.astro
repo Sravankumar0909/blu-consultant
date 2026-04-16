@@ -1,0 +1,25 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import AboutSection from "../components/About.astro";
+import FAQ from "../components/FAQ.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout title="About Us - BLU Consultant Services" description="Learn more about BLU Consultant Services vision, mission and the expert team behind our comprehensive HR solutions.">
+    <Header />
+    <main id="main-content">
+        <!-- Compact Page Header -->
+        <section class="pt-24 pb-4 bg-gradient-to-br from-primary-50 via-white to-accent-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <span class="text-sm font-semibold tracking-wider uppercase text-primary-600">About Us</span>
+                <h1 class="mt-2 text-3xl sm:text-4xl font-extrabold text-gray-900">Who We Are</h1>
+                <p class="mt-3 text-base text-gray-600 max-w-2xl mx-auto">Discover the people and principles driving BLU Consultant Services mission to transform HR for businesses of every size.</p>
+            </div>
+        </section>
+        
+        <AboutSection />
+        <FAQ />
+    </main>
+    <Footer />
+</Layout>

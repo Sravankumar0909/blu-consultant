@@ -1,0 +1,23 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import ContactSection from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout title="Contact Us - BLU Consultant Services" description="Get in touch with BLU Consultant Services for a customized HR solution proposal. We respond within 24 hours.">
+    <Header />
+    <main id="main-content">
+        <!-- Compact Page Header -->
+        <section class="pt-28 pb-6 bg-gradient-to-br from-primary-50 via-white to-accent-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <span class="text-sm font-semibold tracking-wider uppercase text-primary-600">Get in Touch</span>
+                <h1 class="mt-3 text-4xl sm:text-5xl font-extrabold text-gray-900">Contact Us</h1>
+                <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">Ready to transform your HR operations? Fill out the form and our team will get back to you within 24 hours.</p>
+            </div>
+        </section>
+        
+        <ContactSection />
+    </main>
+    <Footer />
+</Layout>

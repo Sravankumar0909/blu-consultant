@@ -1,0 +1,39 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import ServiceDetail from '../../components/ServiceDetail.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout title="Insurance Coverage Solutions — BLU Consultant Services" description="Group medical, personal accident, business risk, marine, property & fire insurance with advisory and renewal support.">
+  <Header />
+  <main id="main-content">
+    <section class="pt-28 pb-6 bg-gradient-to-br from-primary-50 via-white to-accent-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span class="text-sm font-semibold tracking-wider uppercase text-primary-600">Our Services</span>
+        <h1 class="mt-3 text-4xl sm:text-5xl font-extrabold text-gray-900">Insurance Coverage Solutions</h1>
+        <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">Comprehensive insurance coverage to protect your employees and business assets.</p>
+      </div>
+    </section>
+
+    <ServiceDetail
+      title="Insurance Solutions"
+      subtitle="Coverage & Protection"
+      description="We offer a full spectrum of insurance coverage solutions, from employee welfare to business risk mitigation, with end-to-end advisory and renewal support."
+      features={[
+        'Group Medical Coverage (GMC)',
+        'Group Personal Accident (GPA)',
+        'Business Risk Coverage',
+        'Marine Insurance',
+        'Property & Fire Insurance',
+        'Policy Advisory & Renewal Support',
+      ]}
+      benefits={[
+        'Employee welfare protection',
+        'Business risk mitigation',
+        'Customized insurance solutions',
+      ]}
+    />
+  </main>
+  <Footer />
+</Layout>

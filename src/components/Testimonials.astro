@@ -1,0 +1,79 @@
+---
+const testimonials = [
+  {
+    quote: 'BLU Consultant Services transformed our entire hiring process. We reduced time-to-hire by 40% and the quality of candidates has never been better.',
+    name: 'Emily Rodriguez',
+    role: 'CEO, TechVenture Inc.',
+    rating: 5,
+  },
+  {
+    quote: 'Their compliance team saved us from a potential six-figure fine. They identified gaps we didn\'t even know existed. Truly invaluable.',
+    name: 'Michael Chen',
+    role: 'COO, GreenLeaf Manufacturing',
+    rating: 5,
+  },
+  {
+    quote: 'The training programs they designed for our managers led to a 30% improvement in employee satisfaction scores within just six months.',
+    name: 'Amanda Foster',
+    role: 'VP of People, Skyline Corp',
+    rating: 5,
+  },
+  {
+    quote: 'Switching to BLU Consultant Services for payroll was the best decision we made. Zero errors in 18 months and our team loves the self-service portal.',
+    name: 'Robert Kim',
+    role: 'CFO, Pacific Digital',
+    rating: 5,
+  },
+  {
+    quote: 'As a startup, we had no HR infrastructure. BLU Consultant Services built everything from scratch — policies, onboarding, benefits — all within weeks.',
+    name: 'Lisa Nakamura',
+    role: 'Founder, NovaBright',
+    rating: 5,
+  },
+  {
+    quote: 'Professional, responsive, and deeply knowledgeable. They feel like a true extension of our team rather than an outside vendor.',
+    name: 'Thomas Wright',
+    role: 'HR Director, Atlas Healthcare',
+    rating: 5,
+  },
+];
+---
+
+<section id="testimonials" class="py-20 bg-primary-900" aria-labelledby="testimonials-heading">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto">
+      <span class="text-sm font-semibold tracking-wider uppercase text-primary-300">Testimonials</span>
+      <h2 id="testimonials-heading" class="mt-3 text-3xl sm:text-4xl font-bold text-white">Trusted by Growing Businesses</h2>
+      <p class="mt-4 text-primary-200 text-lg">Hear from leaders who partnered with us to transform their HR operations.</p>
+    </div>
+
+    <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      {testimonials.map((t) => (
+        <figure class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:bg-white/15 transition-colors">
+          <!-- Stars -->
+          <div class="flex gap-1 text-yellow-400" role="img" aria-label={`Rating: ${t.rating} out of 5 stars`}>
+            {Array(t.rating).fill(0).map(() => (
+              <svg class="w-5 h-5 fill-current" aria-hidden="true" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+            ))}
+          </div>
+
+          <blockquote class="mt-4 text-white/90 leading-relaxed">
+            <p>"{t.quote}"</p>
+          </blockquote>
+
+          <figcaption class="mt-6 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-primary-700 flex items-center justify-center text-sm font-bold text-white" aria-hidden="true">
+              {t.name.split(' ').map((n) => n[0]).join('')}
+            </div>
+            <div>
+              <cite class="text-sm font-semibold text-white not-italic">{t.name}</cite>
+              <p class="text-xs text-primary-300">{t.role}</p>
+            </div>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>

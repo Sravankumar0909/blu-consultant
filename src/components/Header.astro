@@ -1,0 +1,259 @@
+---
+const services = [
+  { label: 'Manpower Outsourcing & Staffing', href: '/services/manpower-outsourcing' },
+  { label: 'HR Compliance & Statutory Services', href: '/services/hr-compliance' },
+  { label: 'Payroll & Employee Lifecycle', href: '/services/payroll-management' },
+  { label: 'PoSH Advisory & Compliance', href: '/services/posh-advisory' },
+];
+
+const navLinks = [
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' },
+  { label: 'Services', href: '/services', children: services },
+  { label: 'Industries', href: '/industries' },
+  { label: 'Contact', href: '/contact' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16" aria-label="Main navigation" role="banner">
+    <!-- Logo -->
+    <a href="/" aria-label="BLU Consultant Services Home" class="flex items-center gap-2 font-bold text-xl text-primary-700">
+      <svg class="w-8 h-8" aria-hidden="true" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="36" height="36" rx="8" fill="#2563eb"/>
+        <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui" font-weight="700" font-size="18" fill="white">B</text>
+      </svg>
+      <span>BLU<span class="text-accent-600"> Consultant Services</span></span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <ul class="hidden lg:flex items-center gap-1 text-sm font-medium text-gray-600" role="menubar">
+      {navLinks.map((link) => (
+        <li class={`relative ${link.children ? 'desktop-dropdown' : ''}`} role="none">
+          {link.children ? (
+            <button
+              type="button"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="desktop-services-menu"
+              class:list={[
+                'desktop-dropdown-btn px-3 py-2 rounded-lg inline-flex items-center gap-1 transition-colors cursor-pointer',
+                currentPath.startsWith(link.href)
+                  ? 'text-primary-600 bg-primary-50'
+                  : 'hover:text-primary-600 hover:bg-gray-50',
+              ]}
+              role="menuitem"
+            >
+              {link.label}
+              <svg class="w-4 h-4 transition-transform" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+          ) : (
+            <a
+              href={link.href}
+              class:list={[
+                'px-3 py-2 rounded-lg inline-flex items-center gap-1 transition-colors',
+                currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
+                  ? 'text-primary-600 bg-primary-50'
+                  : 'hover:text-primary-600 hover:bg-gray-50',
+              ]}
+              role="menuitem"
+            >
+              {link.label}
+            </a>
+          )}
+          {link.children && (
+            <div id="desktop-services-menu" class="absolute top-full left-0 pt-2 opacity-0 invisible transition-all duration-200" role="menu" aria-label="Services submenu">
+              <div class="w-72 bg-white rounded-xl shadow-xl shadow-gray-200/50 border border-gray-100 py-2 overflow-hidden">
+                {link.children.map((child) => (
+                  <a
+                    href={child.href}
+                    role="menuitem"
+                    aria-label={child.label}
+                    class:list={[
+                      'block px-4 py-2.5 text-sm transition-colors',
+                      currentPath === child.href
+                        ? 'text-primary-600 bg-primary-50'
+                        : 'text-gray-600 hover:text-primary-600 hover:bg-primary-50/50 focus:text-primary-600 focus:bg-primary-50/50',
+                    ]}
+                  >
+                    {child.label}
+                  </a>
+                ))}
+                <div class="border-t border-gray-100 mt-1 pt-1">
+                  <a href="/services" role="menuitem" class="block px-4 py-2.5 text-sm font-semibold text-primary-600 hover:bg-primary-50/50 focus:bg-primary-50/50 transition-colors">
+                    View All Services →
+                  </a>
+                </div>
+              </div>
+            </div>
+          )}
+        </li>
+      ))}
+    </ul>
+
+    <!-- CTA -->
+    <a
+      href="/contact"
+      class="hidden lg:inline-flex items-center px-5 py-2 rounded-lg bg-primary-600 text-white text-sm font-semibold hover:bg-primary-700
+        focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 transition-colors shadow-md shadow-primary-200"
+    >
+      Get Started
+    </a>
+
+    <!-- Mobile menu button -->
+    <button id="mobile-menu-btn" class="lg:hidden p-2 text-gray-600 hover:text-primary-600 focus:ring-2 focus:ring-primary-400 focus:rounded-lg"
+      aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <svg id="menu-icon-open" class="w-6 h-6" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+      <svg id="menu-icon-close" class="w-6 h-6 hidden" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden lg:hidden border-t border-gray-100 bg-white max-h-[80vh] overflow-y-auto" role="navigation" aria-label="Mobile navigation">
+    <ul class="px-4 py-4 space-y-1 text-sm font-medium text-gray-600">
+      {navLinks.map((link) => (
+        <li>
+          {link.children ? (
+            <div>
+              <button
+                class="mobile-dropdown-btn w-full flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-gray-50 focus:bg-gray-50
+                  focus:outline-none focus:ring-2 focus:ring-primary-400 transition-colors"
+                data-dropdown={link.label}
+                aria-expanded="false"
+                aria-controls={`mobile-${link.label.toLowerCase()}-menu`}
+              >
+                <span>{link.label}</span>
+                <svg class="mobile-dropdown-icon w-4 h-4 transition-transform" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+              </button>
+              <div id={`mobile-${link.label.toLowerCase()}-menu`} class="mobile-dropdown-content hidden pl-4 space-y-1 mt-1" role="menu">
+                {link.children.map((child) => (
+                  <a href={child.href} role="menuitem" class="block px-3 py-2 rounded-lg text-gray-500 hover:text-primary-600
+                    hover:bg-primary-50/50 focus:text-primary-600 focus:bg-primary-50/50 focus:outline-none transition-colors">
+                    {child.label}
+                  </a>
+                ))}
+                <a href="/services" role="menuitem" class="block px-3 py-2 rounded-lg font-semibold text-primary-600 hover:bg-primary-50/50 focus:bg-primary-50/50 focus:outline-none transition-colors">
+                  View All Services →
+                </a>
+              </div>
+            </div>
+          ) : (
+            <a href={link.href} class="block px-3 py-2.5 rounded-lg hover:text-primary-600 hover:bg-gray-50 focus:text-primary-600
+              focus:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-400 transition-colors">
+              {link.label}
+            </a>
+          )}
+        </li>
+      ))}
+      <li class="pt-2">
+        <a href="/contact" class="block text-center px-5 py-2.5 rounded-lg bg-primary-600 text-white font-semibold hover:bg-primary-700
+          focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 transition-colors">
+          Get Started
+        </a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<script>
+  // Mobile menu toggle
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('menu-icon-open');
+  const iconClose = document.getElementById('menu-icon-close');
+
+  btn?.addEventListener('click', () => {
+    const isOpen = !menu?.classList.contains('hidden');
+    menu?.classList.toggle('hidden');
+    iconOpen?.classList.toggle('hidden', !isOpen);
+    iconClose?.classList.toggle('hidden', isOpen);
+    btn.setAttribute('aria-expanded', String(!isOpen));
+    btn.setAttribute('aria-label', isOpen ? 'Open menu' : 'Close menu');
+  });
+
+  // Mobile dropdown toggles
+  document.querySelectorAll('.mobile-dropdown-btn').forEach((dropBtn) => {
+    dropBtn.addEventListener('click', () => {
+      const content = dropBtn.nextElementSibling;
+      const icon = dropBtn.querySelector('.mobile-dropdown-icon');
+      const isOpen = content?.classList.contains('hidden');
+      content?.classList.toggle('hidden');
+      icon?.classList.toggle('rotate-180');
+      dropBtn.setAttribute('aria-expanded', String(isOpen));
+    });
+  });
+
+  // Close mobile menu on link click
+  menu?.querySelectorAll('a').forEach((a) =>
+    a.addEventListener('click', () => {
+      menu?.classList.add('hidden');
+      iconOpen?.classList.remove('hidden');
+      iconClose?.classList.add('hidden');
+      btn?.setAttribute('aria-expanded', 'false');
+      btn?.setAttribute('aria-label', 'Open menu');
+    })
+  );
+
+  // Desktop dropdown - keyboard support
+  document.querySelectorAll('.desktop-dropdown').forEach((dropdown) => {
+    const trigger = dropdown.querySelector('.desktop-dropdown-btn') as HTMLElement;
+    const submenu = dropdown.querySelector('[role="menu"]');
+    if (!trigger || !submenu) return;
+
+    const showMenu = () => {
+      submenu.classList.remove('opacity-0', 'invisible');
+      submenu.classList.add('opacity-100', 'visible');
+      trigger.setAttribute('aria-expanded', 'true');
+      trigger.querySelector('svg')?.classList.add('rotate-180');
+    };
+
+    const hideMenu = () => {
+      submenu.classList.add('opacity-0', 'invisible');
+      submenu.classList.remove('opacity-100', 'visible');
+      trigger.setAttribute('aria-expanded', 'false');
+      trigger.querySelector('svg')?.classList.remove('rotate-180');
+    };
+
+    // Hover support (existing behavior)
+    dropdown.addEventListener('mouseenter', showMenu);
+    dropdown.addEventListener('mouseleave', hideMenu);
+
+    // Keyboard: toggle on Enter/Space
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+      isOpen ? hideMenu() : showMenu();
+      if (!isOpen) {
+        const firstLink = submenu.querySelector('a');
+        firstLink?.focus();
+      }
+    });
+
+    // Keyboard: Escape closes dropdown
+    dropdown.addEventListener('keydown', (e) => {
+      const ke = e as KeyboardEvent;
+      if (ke.key === 'Escape') {
+        hideMenu();
+        trigger.focus();
+      }
+    });
+
+    // Close when focus leaves the dropdown entirely
+    dropdown.addEventListener('focusout', (e) => {
+      const fe = e as FocusEvent;
+      if (!dropdown.contains(fe.relatedTarget as Node)) {
+        hideMenu();
+      }
+    });
+  });
+</script>

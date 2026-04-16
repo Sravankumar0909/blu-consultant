@@ -1,0 +1,70 @@
+---
+interface Props {
+	title: string;
+	description?: string;
+	type?: string;
+}
+
+const { title, description = 'Blu Consultant Services - Your trusted partner for all HR solutions. Manpower staffing, PoSH compliance, payroll, HR policy, training & insurance services across India.', type= 'website' } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://www.bluconsultantservices.in');
+
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'ProfessionalService',
+	name: 'BluConsultantServices',
+	url: 'https://www.bluconsultantservices.in',
+	description: 'Comprehensive HR solutions including manpower staffing, PoSH compliance, payroll management, HR policy, training and insurance services across India.',
+	areaServed: 'IN',
+	serviceType: ['HR Consulting', 'Manpower Outsourcing', 'PoSH Advisory', 'Payroll Management', 'HR Compliance', 'Corporate Training', 'Insurance Solutions'],
+	foundingDate: '2011',
+	contactPoint: {
+		'@type': 'ContactPoint',
+		telephone: '+91 7204123457',
+		contactType: 'customer service',
+		email: 'hr@bluconsultantservices.com',
+	},
+};
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content={description} />
+		<meta name="keywords" content="HR solutions, manpower outsourcing, staffing, PoSH compliance, HR compliance, payroll management, HR policy, training, insurance, PAN India" />
+		<meta name="robots" content="index, follow" />
+		<meta name="theme-color", content="#2563eb" />
+		<meta name="author" content="BluConsultantServices" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content={type} />
+		<meta property="og:url" content={canonicalURL.href} />
+		<meta property="og:site_name" content="BluConsultantServices" />
+		<meta property="og:locale" content="en_IN" />
+		<meta property="og:image" content={new URL('/og-image.jpg', Astro.site || 'https://www.bluconsultantservices.in').href} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content="BluConsultantServices - Your One-Stop HR Partner" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={new URL('/twitter-image.jpg', Astro.site || 'https://www.bluconsultantservices.in').href} />
+		<meta name="twitter:image:alt" content="BluConsultantServices - Your One-Stop HR Partner" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<link rel="canonical" href={canonicalURL.href} />
+		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+		<title>{title}</title>
+	</head>
+	<body class="bg-white text-gray-800 antialiased">
+		<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary-600 focus:text-white focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400">
+			Skip to content
+		</a>
+		<slot />
+	</body>
+</html>

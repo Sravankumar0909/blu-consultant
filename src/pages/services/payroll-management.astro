@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import ServiceDetail from '../../components/ServiceDetail.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout title="Payroll & Employee Lifecycle Management — BLU Consultant Services" description="End-to-end payroll processing, attendance & leave management, salary structuring and full & final settlement.">
+  <Header />
+  <main id="main-content">
+    <section class="pt-28 pb-6 bg-gradient-to-br from-primary-50 via-white to-accent-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span class="text-sm font-semibold tracking-wider uppercase text-primary-600">Our Services</span>
+        <h1 class="mt-3 text-4xl sm:text-5xl font-extrabold text-gray-900">Payroll & Employee Lifecycle Management</h1>
+        <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">Accurate, timely payroll processing with seamless onboarding and exit management.</p>
+      </div>
+    </section>
+
+    <ServiceDetail
+      title="Payroll Solutions"
+      subtitle="Payroll & Lifecycle"
+      description="Our comprehensive payroll and employee lifecycle management services handle everything from onboarding to exit, ensuring accuracy, compliance and a smooth employee experience."
+      features={[
+        'End-to-End Payroll Processing',
+        'Attendance & Leave Management',
+        'Salary Structuring & Compliance',
+        'Employee Record Management',
+        'Full & Final Settlement',
+      ]}
+      benefits={[
+        'Accurate & timely payroll',
+        'Reduced admin workload',
+        'Smooth onboarding & exit process',
+      ]}
+    />
+  </main>
+  <Footer />
+</Layout>

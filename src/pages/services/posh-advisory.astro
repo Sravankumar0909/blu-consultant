@@ -1,0 +1,39 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import ServiceDetail from '../../components/ServiceDetail.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout title="PoSH Advisory & Compliance — BLU Consultant Services" description="Complete PoSH compliance solutions including external member services, IC training, policy drafting and annual filing support.">
+  <Header />
+  <main id="main-content">
+    <section class="pt-28 pb-6 bg-gradient-to-br from-primary-50 via-white to-accent-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span class="text-sm font-semibold tracking-wider uppercase text-primary-600">Our Services</span>
+        <h1 class="mt-3 text-4xl sm:text-5xl font-extrabold text-gray-900">PoSH Advisory & Compliance</h1>
+        <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">Ensuring safe, compliant and inclusive workplaces through comprehensive PoSH solutions.</p>
+      </div>
+    </section>
+
+    <ServiceDetail
+      title="PoSH Compliance Solutions"
+      subtitle="Workplace Safety"
+      description="We provide end-to-end PoSH (Prevention of Sexual Harassment) advisory and compliance services to help organizations create safe and respectful workplaces."
+      features={[
+        'External Member Services',
+        'PoSH Policy Drafting & Implementation',
+        'Internal Committee Formation Support',
+        'IC Training & Employee Awareness Programs',
+        'Annual Filing Support',
+        'Investigation Advisory',
+      ]}
+      benefits={[
+        'Legal compliance',
+        'Safe workplace culture',
+        'Reduced legal & reputational risk',
+      ]}
+    />
+  </main>
+  <Footer />
+</Layout>

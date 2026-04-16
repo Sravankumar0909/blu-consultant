@@ -1,0 +1,43 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import ServiceDetail from '../../components/ServiceDetail.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout title="Manpower Outsourcing & Staffing — BLU Consultant Services" description="PAN India recruitment support with permanent & contract staffing, leadership hiring and background verification.">
+  <Header />
+  <main id="main-content">
+    <section class="pt-28 pb-6 bg-gradient-to-br from-primary-50 via-white to-accent-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span class="text-sm font-semibold tracking-wider uppercase text-primary-600">Our Services</span>
+        <h1 class="mt-3 text-4xl sm:text-5xl font-extrabold text-gray-900">Manpower Outsourcing & Staffing</h1>
+        <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">End-to-end recruitment solutions with PAN India coverage and rapid turnaround.</p>
+      </div>
+    </section>
+
+    <ServiceDetail
+      title="Staffing Solutions"
+      subtitle="Recruitment"
+      description="We provide comprehensive manpower outsourcing and staffing solutions designed to meet the diverse hiring needs of businesses across India."
+      features={[
+        'Permanent & Contract Staffing',
+        'Leadership & Niche Hiring',
+        'PAN India Recruitment Support',
+        'Background Verification',
+      ]}
+      benefits={[
+        'Faster hiring turnaround',
+        'Access to quality talent',
+        'Reduced recruitment costs',
+        'PAN India talent network',
+      ]}
+      process={[
+        { title: 'Database Management', desc: 'We maintain constantly reviewed and updated professional records for all sectors, ensuring fast access to qualified talent.' },
+        { title: 'Field Expertise', desc: 'Our specialists cover sales, marketing, IT, accounts, HR and more – understanding the unique needs of each function.' },
+        { title: 'Client Collaboration', desc: 'We work in close consultation with clients to understand their specific culture and staffing requirements for a perfect fit.' },
+      ]}
+    />
+  </main>
+  <Footer />
+</Layout>

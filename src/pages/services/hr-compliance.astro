@@ -1,0 +1,39 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import ServiceDetail from '../../components/ServiceDetail.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout title="HR Compliance & Statutory Services — BLU Consultant Services" description="PF, ESI, PT, LWF compliance, labour law advisory, registrations and audit-ready documentation services.">
+  <Header />
+  <main id="main-content">
+    <section class="pt-28 pb-6 bg-gradient-to-br from-primary-50 via-white to-accent-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span class="text-sm font-semibold tracking-wider uppercase text-primary-600">Our Services</span>
+        <h1 class="mt-3 text-4xl sm:text-5xl font-extrabold text-gray-900">HR Compliance & Statutory Services</h1>
+        <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">Stay 100% compliant with all statutory requirements and avoid penalties.</p>
+      </div>
+    </section>
+
+    <ServiceDetail
+      title="Statutory Compliance"
+      subtitle="Compliance"
+      description="Our HR compliance and statutory services ensure your organization meets all legal requirements across jurisdictions, keeping you audit-ready at all times."
+      features={[
+        'PF, ESI, PT, LWF Compliance',
+        'Labour Law Advisory',
+        'Shop & Establishment Registration',
+        'GST & TAN Registration',
+        'Compliance Audit & Documentation',
+        'Government Portal Registrations',
+      ]}
+      benefits={[
+        '100% statutory compliance',
+        'Avoid penalties',
+        'Audit-ready documentation',
+      ]}
+    />
+  </main>
+  <Footer />
+</Layout>

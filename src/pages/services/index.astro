@@ -1,0 +1,23 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Services from '../../components/Services.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout title="Our Services — BLU Consultant Services" description="Explore BLU Consultant Services comprehensive HR services including staffing, PoSH compliance, payroll, training, insurance and more.">
+  <Header />
+  <main id="main-content">
+    <!-- Page Header -->
+    <section class="pt-28 pb-6 bg-gradient-to-br from-primary-50 via-white to-accent-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span class="text-sm font-semibold tracking-wider uppercase text-primary-600">Our Services</span>
+        <h1 class="mt-3 text-4xl sm:text-5xl font-extrabold text-gray-900">Comprehensive HR Solutions</h1>
+        <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">Your trusted single partner for all HR solutions. We move beyond transactional tasks to provide strategic support that builds a compliant, inclusive and high-performing workforce.</p>
+      </div>
+    </section>
+
+    <Services />
+  </main>
+  <Footer />
+</Layout>
