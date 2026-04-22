@@ -1,0 +1,474 @@
+---
+---
+
+<section id="careers" class="pt-10 pb-20 bg-white" aria-labelledby="careers-heading">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Why Join -->
+        <div class="mb-16 text-center max-w-3xl mx-auto">
+            <span class="text-sm font-semibold tracking-wider uppercase text-primary-600">Career Opportunities</span>
+            <h2 id="careers-heading" class="mt-3 text-3xl sm:text-4xl font-bold text-gray-900">Find Your Next Opportunity</h2>
+            <p class="mt-4 text-gray-600 text-lg leading-relaxed">
+                Whether you looking for your first job or planning a career switch, submit your details and we'll match you with the right opportunities. When a recruitment drive matches your skills, our team will reach out to you.
+            </p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-16">
+            <!-- How It Works -->
+            <div>
+                <h3 class="text-2xl font-bold text-gray-900">How It Works</h3>
+                <div class="mt-8 space-y-8">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-primary-600 text-white font-bold text-lg flex-shrink-0">1</div>
+                        <div>
+                            <p class="font-semibold text-gray-900">Submit Your Profile</p>
+                            <p class="text-gray-600 mt-1">Fill out the form with your skills, experience, and the kind of role you're looking for.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-primary-600 text-white font-bold text-lg flex-shrink-0">2</div>
+                        <div>
+                            <p class="font-semibold text-gray-900">We Match Your Skills</p>
+                            <p class="text-gray-600 mt-1">When our clients run recruitment drives, we compare their requirements against your skill set.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-primary-600 text-white font-bold text-lg flex-shrink-0">3</div>
+                        <div>
+                            <p class="font-semibold text-gray-900">Get Shortlisted</p>
+                            <p class="text-gray-600 mt-1">If your profile matches, we'll contact you with the opportunity details and next steps.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-12 p-6 bg-accent-50 rounded-2xl border border-accent-100">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 flex items-center justify-center rounded-lg bg-accent-100 text-accent-700 flex-shrink-0">
+                            <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-gray-900">Your data is safe with us</p>
+                            <p class="text-gray-600 text-sm mt-1">We only share your profile with matched recruitment drives. Your information is never sold or shared with third parties.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Candidate Registration Form -->
+            <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100">
+                <h3 class="text-xl font-bold text-gray-900 mb-6">Register as a Job Seeker</h3>
+                <form id="careerForm" class="space-y-5" aria-label="Job seeker registration form" novalidate>
+                    <div class="grid sm:grid-cols-2 gap-5">
+                        <div>
+                            <label for="candidateFirstName" class="block text-sm font-medium text-gray-700 mb-1">First Name <span class="text-red-500" aria-hidden="true">*</span></label>
+                            <input
+                                type="text"
+                                id="candidateFirstName"
+                                name="firstName"
+                                autocomplete="given-name"
+                                required
+                                aria-required="true"
+                                aria-describedby="candidateFirstName-error"
+                                class="w-full px-4 py-2.5 rounded-lg border border-gray-200 text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition"
+                                placeholder="John"
+                            />
+                            <p id="candidateFirstName-error" class="mt-1 text-xs text-red-500 hidden" role="alert">First name is required.</p>
+                        </div>
+                        <div>
+                            <label for="candidateLastName" class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+                            <input
+                                type="text"
+                                id="candidateLastName"
+                                name="lastName"
+                                autocomplete="family-name"
+                                class="w-full px-4 py-2.5 rounded-lg border border-gray-200 text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition"
+                                placeholder="Doe"
+                            />
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="candidateEmail" class="block text-sm font-medium text-gray-700 mb-1">Email <span class="text-red-500" aria-hidden="true">*</span></label>
+                        <input
+                            type="email"
+                            id="candidateEmail"
+                            name="email"
+                            autocomplete="email"
+                            required
+                            aria-required="true"
+                            aria-describedby="candidateEmail-error"
+                            class="w-full px-4 py-2.5 rounded-lg border border-gray-200 text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition"
+                            placeholder="john@example.com"
+                        />
+                        <p id="candidateEmail-error" class="mt-1 text-xs text-red-500 hidden" role="alert">Please enter a valid email address.</p>
+                    </div>
+
+                    <div>
+                        <label for="candidatePhone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number <span class="text-red-500" aria-hidden="true">*</span></label>
+                        <input
+                            type="tel"
+                            id="candidatePhone"
+                            name="phone"
+                            autocomplete="tel"
+                            required
+                            aria-required="true"
+                            aria-describedby="candidatePhone-error"
+                            class="w-full px-4 py-2.5 rounded-lg border border-gray-200 text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition"
+                            placeholder="+91 98765 43210"
+                        />
+                        <p id="candidatePhone-error" class="mt-1 text-xs text-red-500 hidden" role="alert">Please enter a valid phone number.</p>
+                    </div>
+
+                    <div>
+                        <label for="candidateExperience" class="block text-sm font-medium text-gray-700 mb-1">Total Experience <span class="text-red-500" aria-hidden="true">*</span></label>
+                        <select
+                            id="candidateExperience"
+                            name="experience"
+                            required
+                            aria-required="true"
+                            aria-describedby="candidateExperience-error"
+                            class="w-full px-4 py-2.5 rounded-lg border border-gray-200 text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition bg-white"
+                        >
+                            <option value="">Select experience</option>
+                            <option value="fresher">Fresher (0 years)</option>
+                            <option value="1-2">1 - 2 years</option>
+                            <option value="3-5">3 - 5 years</option>
+                            <option value="5-10">5 - 10 years</option>
+                            <option value="10+">10+ years</option>
+                        </select>
+                        <p id="candidateExperience-error" class="mt-1 text-xs text-red-500 hidden" role="alert">Please select your experience level.</p>
+                    </div>
+
+                    <div>
+                        <label for="candidateSkills" class="block text-sm font-medium text-gray-700 mb-1">Key Skills <span class="text-red-500" aria-hidden="true">*</span></label>
+                        <input
+                            type="text"
+                            id="candidateSkills"
+                            name="skills"
+                            required
+                            aria-required="true"
+                            aria-describedby="candidateSkills-error"
+                            class="w-full px-4 py-2.5 rounded-lg border border-gray-200 text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition"
+                            placeholder="e.g. JavaScript, Project Management, Sales"
+                        />
+                        <p id="candidateSkills-error" class="mt-1 text-xs text-red-500 hidden" role="alert">Please enter at least one skill.</p>
+                        <p class="text-xs text-gray-500 mt-1">Separate multiple skills with commas</p>
+                    </div>
+
+                    <div>
+                        <label for="candidateRole" class="block text-sm font-medium text-gray-700 mb-1">Preferred Role / Domain</label>
+                        <select
+                            id="candidateRole"
+                            name="preferredRole"
+                            class="w-full px-4 py-2.5 rounded-lg border border-gray-200 text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition bg-white"
+                        >
+                            <option value="">Select preferred domain</option>
+                            <option value="it-software">IT & Software</option>
+                            <option value="hr-admin">HR & Administration</option>
+                            <option value="finance-accounting">Finance & Accounting</option>
+                            <option value="sales-marketing">Sales & Marketing</option>
+                            <option value="operations">Operations & Logistics</option>
+                            <option value="engineering">Engineering & Manufacturing</option>
+                            <option value="healthcare">Healthcare</option>
+                            <option value="customer-support">Customer Support</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="candidateResume" class="block text-sm font-medium text-gray-700 mb-1">Resume <span class="text-red-500" aria-hidden="true">*</span></label>
+                        <input
+                            type="file"
+                            id="candidateResume"
+                            name="resume"
+                            accept=".pdf,.doc,.docx"
+                            required
+                            aria-required="true"
+                            aria-describedby="candidateResume-error"
+                            class="w-full px-4 py-2.5 rounded-lg border border-gray-200 text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition bg-white file:mr-3 file:py-1 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-primary-50 file:text-primary-600 hover:file:bg-primary-100"
+                        />
+                        <p id="candidateResume-error" class="mt-1 text-xs text-red-500 hidden" role="alert">Please upload your resume (PDF, DOC, or DOCX, max 1MB).</p>
+                        <p class="text-xs text-gray-500 mt-1">PDF, DOC, or DOCX only — max 1MB</p>
+                    </div>
+
+                    <button
+                        type="submit"
+                        id="career-submit-btn"
+                        disabled
+                        class="w-full px-6 py-3 rounded-lg bg-primary-600 text-white font-semibold hover:bg-primary-700 focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        Submit My Profile
+                    </button>
+                    <p id="careerFormStatus" class="text-xs text-gray-500 text-center" aria-live="polite">We'll reach out when a matching opportunity comes up.</p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+  // @ts-nocheck
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const PHONE_RE = /^[+]?[\d\s\-().]{7,15}$/;
+  const ALLOWED_TYPES = ["application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"];
+  const MAX_FILE_SIZE = 1024 * 1024; // 1MB
+  const CAREER_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxzTH6oobOKuIB-oDOH3jv7kY1XF0zzV55KWUxg8RlJjNZSWo-qC4B_aGhY24EROgGW/exec";
+
+  // ── Element references ───────────────────────────────────────────────────
+
+  const careerForm = document.getElementById("careerForm");
+  const firstNameEl = document.getElementById("candidateFirstName");
+  const emailEl = document.getElementById("candidateEmail");
+  const phoneEl = document.getElementById("candidatePhone");
+  const experienceEl = document.getElementById("candidateExperience");
+  const skillsEl = document.getElementById("candidateSkills");
+  const resumeEl = document.getElementById("candidateResume");
+  const submitBtn = document.getElementById("career-submit-btn");
+  const statusEl = document.getElementById("careerFormStatus");
+
+  // ── Helpers ──────────────────────────────────────────────────────────────
+
+  function setError(inputEl, errorId, message) {
+    const err = document.getElementById(errorId);
+    inputEl.classList.add("border-red-400");
+    inputEl.classList.remove("border-green-400", "border-gray-200");
+    if (err) {
+      err.textContent = message;
+      err.classList.remove("hidden");
+    }
+  }
+
+  function clearError(inputEl, errorId) {
+    const err = document.getElementById(errorId);
+    inputEl.classList.remove("border-red-400");
+    inputEl.classList.add("border-green-400");
+    if (err) {
+      err.classList.add("hidden");
+    }
+  }
+
+  // ── Submit button state ──────────────────────────────────────────────────
+
+  function updateSubmitState() {
+    if (!submitBtn) return;
+    const firstName = firstNameEl?.value.trim() ?? "";
+    const email = emailEl?.value.trim() ?? "";
+    const phone = phoneEl?.value.trim() ?? "";
+    const experience = experienceEl?.value ?? "";
+    const skills = skillsEl?.value.trim() ?? "";
+    const file = resumeEl?.files?.[0];
+
+    const fileValid = file && ALLOWED_TYPES.includes(file.type) && file.size <= MAX_FILE_SIZE;
+
+    const allFilled =
+      firstName !== "" &&
+      EMAIL_RE.test(email) &&
+      PHONE_RE.test(phone) &&
+      experience !== "" &&
+      skills !== "" &&
+      fileValid;
+
+    submitBtn.disabled = !allFilled;
+  }
+
+  // ── Per-field validators ─────────────────────────────────────────────────
+
+  function validateFirstName() {
+    if (!firstNameEl) return false;
+    if (!firstNameEl.value.trim()) {
+      setError(firstNameEl, "candidateFirstName-error", "First name is required.");
+      return false;
+    }
+    clearError(firstNameEl, "candidateFirstName-error");
+    return true;
+  }
+
+  function validateEmail() {
+    if (!emailEl) return false;
+    const val = emailEl.value.trim();
+    if (!val) {
+      setError(emailEl, "candidateEmail-error", "Email is required.");
+      return false;
+    }
+    if (!EMAIL_RE.test(val)) {
+      setError(emailEl, "candidateEmail-error", "Please enter a valid email address.");
+      return false;
+    }
+    clearError(emailEl, "candidateEmail-error");
+    return true;
+  }
+
+  function validatePhone() {
+    if (!phoneEl) return false;
+    const val = phoneEl.value.trim();
+    if (!val) {
+      setError(phoneEl, "candidatePhone-error", "Phone number is required.");
+      return false;
+    }
+    if (!PHONE_RE.test(val)) {
+      setError(phoneEl, "candidatePhone-error", "Please enter a valid phone number.");
+      return false;
+    }
+    clearError(phoneEl, "candidatePhone-error");
+    return true;
+  }
+
+  function validateExperience() {
+    if (!experienceEl) return false;
+    if (!experienceEl.value) {
+      setError(experienceEl, "candidateExperience-error", "Please select your experience level.");
+      return false;
+    }
+    clearError(experienceEl, "candidateExperience-error");
+    return true;
+  }
+
+  function validateSkills() {
+    if (!skillsEl) return false;
+    if (!skillsEl.value.trim()) {
+      setError(skillsEl, "candidateSkills-error", "Please enter at least one skill.");
+      return false;
+    }
+    clearError(skillsEl, "candidateSkills-error");
+    return true;
+  }
+
+  function validateResume() {
+    if (!resumeEl) return false;
+    const file = resumeEl.files?.[0];
+    if (!file) {
+      setError(resumeEl, "candidateResume-error", "Please upload your resume.");
+      return false;
+    }
+    if (!ALLOWED_TYPES.includes(file.type)) {
+      setError(resumeEl, "candidateResume-error", "Only PDF, DOC, or DOCX files are allowed.");
+      return false;
+    }
+    if (file.size > MAX_FILE_SIZE) {
+      setError(resumeEl, "candidateResume-error", "File size must be under 1MB.");
+      return false;
+    }
+    clearError(resumeEl, "candidateResume-error");
+    return true;
+  }
+
+  // ── Blur + input listeners ───────────────────────────────────────────────
+
+  firstNameEl?.addEventListener("blur", validateFirstName);
+  firstNameEl?.addEventListener("input", () => { validateFirstName(); updateSubmitState(); });
+
+  emailEl?.addEventListener("blur", validateEmail);
+  emailEl?.addEventListener("input", () => { validateEmail(); updateSubmitState(); });
+
+  phoneEl?.addEventListener("blur", validatePhone);
+  phoneEl?.addEventListener("input", () => { validatePhone(); updateSubmitState(); });
+
+  experienceEl?.addEventListener("blur", validateExperience);
+  experienceEl?.addEventListener("change", () => { validateExperience(); updateSubmitState(); });
+
+  skillsEl?.addEventListener("blur", validateSkills);
+  skillsEl?.addEventListener("input", () => { validateSkills(); updateSubmitState(); });
+
+  resumeEl?.addEventListener("change", () => { validateResume(); updateSubmitState(); });
+
+  // ── Submit ───────────────────────────────────────────────────────────────
+
+  careerForm?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const ok = [
+      validateFirstName(),
+      validateEmail(),
+      validatePhone(),
+      validateExperience(),
+      validateSkills(),
+      validateResume(),
+    ].every(Boolean);
+
+    if (!ok) {
+      const firstError = document.querySelector(".border-red-400");
+      firstError?.focus();
+      return;
+    }
+
+    if (submitBtn) {
+      submitBtn.textContent = "Submitting...";
+      submitBtn.disabled = true;
+    }
+
+    try {
+      // Convert file to base64
+      const file = resumeEl.files[0];
+      const base64File = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result.split(",")[1]);
+        reader.onerror = () => reject(new Error("Failed to read file"));
+        reader.readAsDataURL(file);
+      });
+
+      const fd = new FormData(careerForm);
+      const data = Object.fromEntries(fd.entries());
+      delete data.resume; // remove file blob, send base64 instead
+
+      const res = await fetch(CAREER_SCRIPT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain" },
+        body: JSON.stringify({
+          ...data,
+          origin: window.location.origin,
+          resumeBase64: base64File,
+          resumeFileName: file.name,
+          resumeMimeType: file.type,
+        }),
+      });
+
+      const result = await res.json();
+
+      if (result.error) {
+        throw new Error(result.error);
+      }
+
+      careerForm.reset();
+      [firstNameEl, emailEl, phoneEl, skillsEl].forEach((el) => {
+        el?.classList.remove("border-green-400", "border-red-400");
+        el?.classList.add("border-gray-200");
+      });
+      [experienceEl, resumeEl].forEach((el) => {
+        el?.classList.remove("border-green-400", "border-red-400");
+        el?.classList.add("border-gray-200");
+      });
+
+      if (submitBtn) submitBtn.textContent = "Profile Submitted!";
+      if (statusEl) {
+        statusEl.textContent = "Thank you! We'll contact you when a matching drive comes up.";
+        statusEl.classList.replace("text-gray-500", "text-green-600");
+      }
+
+      setTimeout(() => {
+        if (submitBtn) {
+          submitBtn.textContent = "Submit My Profile";
+          submitBtn.disabled = true;
+        }
+        if (statusEl) {
+          statusEl.textContent = "We'll reach out when a matching opportunity comes up.";
+          statusEl.classList.replace("text-green-600", "text-gray-500");
+        }
+      }, 5000);
+
+    } catch (err) {
+      if (submitBtn) {
+        submitBtn.textContent = "Error — Try Again";
+        submitBtn.disabled = false;
+      }
+      if (statusEl) {
+        statusEl.textContent = err instanceof Error ? err.message : "Something went wrong. Please try again.";
+        statusEl.classList.replace("text-gray-500", "text-red-500");
+      }
+    }
+  });
+
+  // ── Init ─────────────────────────────────────────────────────────────────
+
+  updateSubmitState();
+</script>

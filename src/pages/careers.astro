@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import CareersSection from '../components/Careers.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Careers - BLU Consultant Services" description="Explore exciting career opportunities at BLU Consultant Services.">
+    <Header />
+    <main id="main-content">
+        <!-- Page Header -->
+        <section class="pt-28 pb-6 bg-gradient-to-br from-primary-50 via-white to-accent-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <span class="text-sm font-semibold tracking-wider uppercase text-primary-600">Job Seekers</span>
+                <h1 class="mt-3 text-4xl sm:text-5xl font-extrabold text-gray-900">Careers</h1>
+                <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">We believe the right role changes everything. Tell us about yourself once — your skills, goals, and ambitions — and we'll connect you to opportunities that are actually worth your time.</p>
+            </div>
+        </section>
+
+        <CareersSection />
+    </main>
+    <Footer />
+</Layout>
