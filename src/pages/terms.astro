@@ -10,6 +10,8 @@ const terms = [
   { title: 'Payment Terms', desc: 'Payments must be cleared within 30 days from the candidate\'s joining date.' },
   { title: 'Custom Service Pricing', desc: 'PoSH, payroll and other service costs can be discussed on a case-to-case basis.' },
 ];
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
 <Layout title="Terms & Conditions — BLU Consultant Services" description="Review BLU Consultant Services terms and conditions for staffing, payroll and other HR services.">
@@ -43,7 +45,7 @@ const terms = [
         </div>
 
         <div class="mt-12 p-6 rounded-2xl bg-primary-50 border border-primary-100 text-center">
-          <p class="text-gray-700">Have questions about our terms? <a href="/contact" class="text-primary-600 font-semibold hover:underline">Contact us</a> for clarification.</p>
+          <p class="text-gray-700">Have questions about our terms? <a href={`${base}/contact`} class="text-primary-600 font-semibold hover:underline">Contact us</a> for clarification.</p>
         </div>
       </div>
     </section>

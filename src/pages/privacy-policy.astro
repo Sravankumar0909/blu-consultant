@@ -69,6 +69,8 @@ const sections = [
     ],
   },
 ];
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
 <Layout title="Privacy Policy — BLU Consultant Services" description="Read BLU Consultant Services privacy policy to understand how we collect, use, protect and manage your personal and employee data.">
@@ -117,7 +119,7 @@ const sections = [
         </div>
 
         <div class="mt-12 p-6 rounded-2xl bg-primary-50 border border-primary-100 text-center">
-          <p class="text-gray-700">Have questions about your data? <a href="/contact" class="text-primary-600 font-semibold hover:underline focus:underline focus:outline-none">Contact our team</a> for assistance.</p>
+          <p class="text-gray-700">Have questions about your data? <a href={`${base}/contact`} class="text-primary-600 font-semibold hover:underline focus:underline focus:outline-none">Contact our team</a> for assistance.</p>
         </div>
       </div>
     </section>

@@ -4,7 +4,8 @@ import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://www.bluconsultant.com',
+  site: process.env.SITE || 'http://localhost:3000',
+  base: process.env.BASE || (process.env.CI ? '/blu-consultant' : '/'),
   integrations: [tailwind(), sitemap()],
   output: 'static',
 });
