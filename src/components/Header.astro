@@ -20,7 +20,7 @@ const navLinks = [
   { label: 'Contact', href: `${base}/contact` },
 ];
 
-const currentPath = Astro.url.pathname;
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
 ---
 
 <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
@@ -42,9 +42,13 @@ const currentPath = Astro.url.pathname;
               aria-controls="desktop-services-menu"
               class:list={[
                 'desktop-dropdown-btn px-3 py-2 rounded-lg inline-flex items-center gap-1 transition-colors cursor-pointer',
-                currentPath.startsWith(link.href)
-                  ? 'text-primary-600 bg-primary-50'
-                  : 'hover:text-primary-600 hover:bg-gray-50',
+                (() => {
+                  const normalizedCurrent = currentPath.replace(/\/$/, "") || "/";
+                  const normalizedHref = link.href.replace(/\/$/, "") || "/";
+                  return normalizedCurrent.startsWith(normalizedHref) && normalizedHref !== (base || "/")
+                    ? 'text-primary-600 bg-primary-50'
+                    : 'hover:text-primary-600 hover:bg-gray-50';
+                })()
               ]}
               role="menuitem"
             >
@@ -58,9 +62,13 @@ const currentPath = Astro.url.pathname;
               href={link.href}
               class:list={[
                 'px-3 py-2 rounded-lg inline-flex items-center gap-1 transition-colors',
-                currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
-                  ? 'text-primary-600 bg-primary-50'
-                  : 'hover:text-primary-600 hover:bg-gray-50',
+                (() => {
+                  const normalizedCurrent = currentPath.replace(/\/$/, "") || "/";
+                  const normalizedHref = link.href.replace(/\/$/, "") || "/";
+                  const isActive = normalizedCurrent === normalizedHref || 
+                    (normalizedHref !== base && normalizedHref !== "/" && normalizedCurrent.startsWith(normalizedHref));
+                  return isActive ? 'text-primary-600 bg-primary-50' : 'hover:text-primary-600 hover:bg-gray-50';
+                })()  
               ]}
               role="menuitem"
             >

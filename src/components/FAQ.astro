@@ -54,24 +54,27 @@ const faqs = [
 </section>
 
 <script>
-  document.querySelectorAll('.faq-toggle').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const item = btn.closest('.faq-item');
-      const answer = item?.querySelector('.faq-answer');
-      const icon = btn.querySelector('.faq-icon');
-      const isOpen = !answer?.classList.contains('hidden');
+  // @ts-nocheck
+  document.addEventListener('astro:page-load', () => {
+    document.querySelectorAll('.faq-toggle').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const answer = item?.querySelector('.faq-answer');
+        const icon = btn.querySelector('.faq-icon');
+        const isOpen = !answer?.classList.contains('hidden');
 
-      // Close all
-      document.querySelectorAll('.faq-answer').forEach((a) => a.classList.add('hidden'));
-      document.querySelectorAll('.faq-icon').forEach((i) => i.classList.remove('rotate-180'));
-      document.querySelectorAll('.faq-toggle').forEach((b) => b.setAttribute('aria-expanded', 'false'));
+        // Close all
+        document.querySelectorAll('.faq-answer').forEach((a) => a.classList.add('hidden'));
+        document.querySelectorAll('.faq-icon').forEach((i) => i.classList.remove('rotate-180'));
+        document.querySelectorAll('.faq-toggle').forEach((b) => b.setAttribute('aria-expanded', 'false'));
 
-      // Toggle current
-      if (!isOpen) {
-        answer?.classList.remove('hidden');
-        icon?.classList.add('rotate-180');
-        btn.setAttribute('aria-expanded', 'true');
-      }
+        // Toggle current
+        if (!isOpen) {
+          answer?.classList.remove('hidden');
+          icon?.classList.add('rotate-180');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
     });
   });
 </script>
