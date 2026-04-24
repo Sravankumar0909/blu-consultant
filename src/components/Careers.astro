@@ -209,266 +209,270 @@
 
 <script>
   // @ts-nocheck
-  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const PHONE_RE = /^[+]?[\d\s\-().]{7,15}$/;
-  const ALLOWED_TYPES = ["application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"];
-  const MAX_FILE_SIZE = 1024 * 1024; // 1MB
-  const CAREER_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwjEaFkRapCwMumFkg_UEbNGICXc84aPawgqfIZBzQp_qjA41VCjUkL4cAG46y2ZiBh/exec";
 
-  // ── Element references ───────────────────────────────────────────────────
+  document.addEventListener('astro:page-load', () => {
+    // This ensures the script runs after Astro has hydrated the page and all elements are available in the DOM.
+    const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const PHONE_RE = /^[+]?[\d\s\-().]{7,15}$/;
+    const ALLOWED_TYPES = ["application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"];
+    const MAX_FILE_SIZE = 1024 * 1024; // 1MB
+    const CAREER_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwjEaFkRapCwMumFkg_UEbNGICXc84aPawgqfIZBzQp_qjA41VCjUkL4cAG46y2ZiBh/exec";
 
-  const careerForm = document.getElementById("careerForm");
-  const firstNameEl = document.getElementById("candidateFirstName");
-  const emailEl = document.getElementById("candidateEmail");
-  const phoneEl = document.getElementById("candidatePhone");
-  const experienceEl = document.getElementById("candidateExperience");
-  const skillsEl = document.getElementById("candidateSkills");
-  const resumeEl = document.getElementById("candidateResume");
-  const submitBtn = document.getElementById("career-submit-btn");
-  const statusEl = document.getElementById("careerFormStatus");
+    // ── Element references ───────────────────────────────────────────────────
 
-  // ── Helpers ──────────────────────────────────────────────────────────────
+    const careerForm = document.getElementById("careerForm");
+    const firstNameEl = document.getElementById("candidateFirstName");
+    const emailEl = document.getElementById("candidateEmail");
+    const phoneEl = document.getElementById("candidatePhone");
+    const experienceEl = document.getElementById("candidateExperience");
+    const skillsEl = document.getElementById("candidateSkills");
+    const resumeEl = document.getElementById("candidateResume");
+    const submitBtn = document.getElementById("career-submit-btn");
+    const statusEl = document.getElementById("careerFormStatus");
 
-  function setError(inputEl, errorId, message) {
-    const err = document.getElementById(errorId);
-    inputEl.classList.add("border-red-400");
-    inputEl.classList.remove("border-green-400", "border-gray-200");
-    if (err) {
-      err.textContent = message;
-      err.classList.remove("hidden");
-    }
-  }
+    // ── Helpers ──────────────────────────────────────────────────────────────
 
-  function clearError(inputEl, errorId) {
-    const err = document.getElementById(errorId);
-    inputEl.classList.remove("border-red-400");
-    inputEl.classList.add("border-green-400");
-    if (err) {
-      err.classList.add("hidden");
-    }
-  }
-
-  // ── Submit button state ──────────────────────────────────────────────────
-
-  function updateSubmitState() {
-    if (!submitBtn) return;
-    const firstName = firstNameEl?.value.trim() ?? "";
-    const email = emailEl?.value.trim() ?? "";
-    const phone = phoneEl?.value.trim() ?? "";
-    const experience = experienceEl?.value ?? "";
-    const skills = skillsEl?.value.trim() ?? "";
-    const file = resumeEl?.files?.[0];
-
-    const fileValid = file && ALLOWED_TYPES.includes(file.type) && file.size <= MAX_FILE_SIZE;
-
-    const allFilled =
-      firstName !== "" &&
-      EMAIL_RE.test(email) &&
-      PHONE_RE.test(phone) &&
-      experience !== "" &&
-      skills !== "" &&
-      fileValid;
-
-    submitBtn.disabled = !allFilled;
-  }
-
-  // ── Per-field validators ─────────────────────────────────────────────────
-
-  function validateFirstName() {
-    if (!firstNameEl) return false;
-    if (!firstNameEl.value.trim()) {
-      setError(firstNameEl, "candidateFirstName-error", "First name is required.");
-      return false;
-    }
-    clearError(firstNameEl, "candidateFirstName-error");
-    return true;
-  }
-
-  function validateEmail() {
-    if (!emailEl) return false;
-    const val = emailEl.value.trim();
-    if (!val) {
-      setError(emailEl, "candidateEmail-error", "Email is required.");
-      return false;
-    }
-    if (!EMAIL_RE.test(val)) {
-      setError(emailEl, "candidateEmail-error", "Please enter a valid email address.");
-      return false;
-    }
-    clearError(emailEl, "candidateEmail-error");
-    return true;
-  }
-
-  function validatePhone() {
-    if (!phoneEl) return false;
-    const val = phoneEl.value.trim();
-    if (!val) {
-      setError(phoneEl, "candidatePhone-error", "Phone number is required.");
-      return false;
-    }
-    if (!PHONE_RE.test(val)) {
-      setError(phoneEl, "candidatePhone-error", "Please enter a valid phone number.");
-      return false;
-    }
-    clearError(phoneEl, "candidatePhone-error");
-    return true;
-  }
-
-  function validateExperience() {
-    if (!experienceEl) return false;
-    if (!experienceEl.value) {
-      setError(experienceEl, "candidateExperience-error", "Please select your experience level.");
-      return false;
-    }
-    clearError(experienceEl, "candidateExperience-error");
-    return true;
-  }
-
-  function validateSkills() {
-    if (!skillsEl) return false;
-    if (!skillsEl.value.trim()) {
-      setError(skillsEl, "candidateSkills-error", "Please enter at least one skill.");
-      return false;
-    }
-    clearError(skillsEl, "candidateSkills-error");
-    return true;
-  }
-
-  function validateResume() {
-    if (!resumeEl) return false;
-    const file = resumeEl.files?.[0];
-    if (!file) {
-      setError(resumeEl, "candidateResume-error", "Please upload your resume.");
-      return false;
-    }
-    if (!ALLOWED_TYPES.includes(file.type)) {
-      setError(resumeEl, "candidateResume-error", "Only PDF, DOC, or DOCX files are allowed.");
-      return false;
-    }
-    if (file.size > MAX_FILE_SIZE) {
-      setError(resumeEl, "candidateResume-error", "File size must be under 1MB.");
-      return false;
-    }
-    clearError(resumeEl, "candidateResume-error");
-    return true;
-  }
-
-  // ── Blur + input listeners ───────────────────────────────────────────────
-
-  firstNameEl?.addEventListener("blur", validateFirstName);
-  firstNameEl?.addEventListener("input", () => { validateFirstName(); updateSubmitState(); });
-
-  emailEl?.addEventListener("blur", validateEmail);
-  emailEl?.addEventListener("input", () => { validateEmail(); updateSubmitState(); });
-
-  phoneEl?.addEventListener("blur", validatePhone);
-  phoneEl?.addEventListener("input", () => { validatePhone(); updateSubmitState(); });
-
-  experienceEl?.addEventListener("blur", validateExperience);
-  experienceEl?.addEventListener("change", () => { validateExperience(); updateSubmitState(); });
-
-  skillsEl?.addEventListener("blur", validateSkills);
-  skillsEl?.addEventListener("input", () => { validateSkills(); updateSubmitState(); });
-
-  resumeEl?.addEventListener("change", () => { validateResume(); updateSubmitState(); });
-
-  // ── Submit ───────────────────────────────────────────────────────────────
-
-  careerForm?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const ok = [
-      validateFirstName(),
-      validateEmail(),
-      validatePhone(),
-      validateExperience(),
-      validateSkills(),
-      validateResume(),
-    ].every(Boolean);
-
-    if (!ok) {
-      const firstError = document.querySelector(".border-red-400");
-      firstError?.focus();
-      return;
+    function setError(inputEl, errorId, message) {
+      const err = document.getElementById(errorId);
+      inputEl.classList.add("border-red-400");
+      inputEl.classList.remove("border-green-400", "border-gray-200");
+      if (err) {
+        err.textContent = message;
+        err.classList.remove("hidden");
+      }
     }
 
-    if (submitBtn) {
-      submitBtn.textContent = "Submitting...";
-      submitBtn.disabled = true;
+    function clearError(inputEl, errorId) {
+      const err = document.getElementById(errorId);
+      inputEl.classList.remove("border-red-400");
+      inputEl.classList.add("border-green-400");
+      if (err) {
+        err.classList.add("hidden");
+      }
     }
 
-    try {
-      // Convert file to base64
-      const file = resumeEl.files[0];
-      const base64File = await new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result.split(",")[1]);
-        reader.onerror = () => reject(new Error("Failed to read file"));
-        reader.readAsDataURL(file);
-      });
+    // ── Submit button state ──────────────────────────────────────────────────
 
-      const fd = new FormData(careerForm);
-      const data = Object.fromEntries(fd.entries());
-      delete data.resume; // remove file blob, send base64 instead
+    function updateSubmitState() {
+      if (!submitBtn) return;
+      const firstName = firstNameEl?.value.trim() ?? "";
+      const email = emailEl?.value.trim() ?? "";
+      const phone = phoneEl?.value.trim() ?? "";
+      const experience = experienceEl?.value ?? "";
+      const skills = skillsEl?.value.trim() ?? "";
+      const file = resumeEl?.files?.[0];
 
-      const res = await fetch(CAREER_SCRIPT_URL, {
-        method: "POST",
-        headers: { "Content-Type": "text/plain" },
-        body: JSON.stringify({
-          ...data,
-          origin: window.location.origin,
-          resumeBase64: base64File,
-          resumeFileName: file.name,
-          resumeMimeType: file.type,
-        }),
-      });
+      const fileValid = file && ALLOWED_TYPES.includes(file.type) && file.size <= MAX_FILE_SIZE;
 
-      const result = await res.json();
+      const allFilled =
+        firstName !== "" &&
+        EMAIL_RE.test(email) &&
+        PHONE_RE.test(phone) &&
+        experience !== "" &&
+        skills !== "" &&
+        fileValid;
 
-      if (result.error) {
-        throw new Error(result.error);
+      submitBtn.disabled = !allFilled;
+    }
+
+    // ── Per-field validators ─────────────────────────────────────────────────
+
+    function validateFirstName() {
+      if (!firstNameEl) return false;
+      if (!firstNameEl.value.trim()) {
+        setError(firstNameEl, "candidateFirstName-error", "First name is required.");
+        return false;
+      }
+      clearError(firstNameEl, "candidateFirstName-error");
+      return true;
+    }
+
+    function validateEmail() {
+      if (!emailEl) return false;
+      const val = emailEl.value.trim();
+      if (!val) {
+        setError(emailEl, "candidateEmail-error", "Email is required.");
+        return false;
+      }
+      if (!EMAIL_RE.test(val)) {
+        setError(emailEl, "candidateEmail-error", "Please enter a valid email address.");
+        return false;
+      }
+      clearError(emailEl, "candidateEmail-error");
+      return true;
+    }
+
+    function validatePhone() {
+      if (!phoneEl) return false;
+      const val = phoneEl.value.trim();
+      if (!val) {
+        setError(phoneEl, "candidatePhone-error", "Phone number is required.");
+        return false;
+      }
+      if (!PHONE_RE.test(val)) {
+        setError(phoneEl, "candidatePhone-error", "Please enter a valid phone number.");
+        return false;
+      }
+      clearError(phoneEl, "candidatePhone-error");
+      return true;
+    }
+
+    function validateExperience() {
+      if (!experienceEl) return false;
+      if (!experienceEl.value) {
+        setError(experienceEl, "candidateExperience-error", "Please select your experience level.");
+        return false;
+      }
+      clearError(experienceEl, "candidateExperience-error");
+      return true;
+    }
+
+    function validateSkills() {
+      if (!skillsEl) return false;
+      if (!skillsEl.value.trim()) {
+        setError(skillsEl, "candidateSkills-error", "Please enter at least one skill.");
+        return false;
+      }
+      clearError(skillsEl, "candidateSkills-error");
+      return true;
+    }
+
+    function validateResume() {
+      if (!resumeEl) return false;
+      const file = resumeEl.files?.[0];
+      if (!file) {
+        setError(resumeEl, "candidateResume-error", "Please upload your resume.");
+        return false;
+      }
+      if (!ALLOWED_TYPES.includes(file.type)) {
+        setError(resumeEl, "candidateResume-error", "Only PDF, DOC, or DOCX files are allowed.");
+        return false;
+      }
+      if (file.size > MAX_FILE_SIZE) {
+        setError(resumeEl, "candidateResume-error", "File size must be under 1MB.");
+        return false;
+      }
+      clearError(resumeEl, "candidateResume-error");
+      return true;
+    }
+
+    // ── Blur + input listeners ───────────────────────────────────────────────
+
+    firstNameEl?.addEventListener("blur", validateFirstName);
+    firstNameEl?.addEventListener("input", () => { validateFirstName(); updateSubmitState(); });
+
+    emailEl?.addEventListener("blur", validateEmail);
+    emailEl?.addEventListener("input", () => { validateEmail(); updateSubmitState(); });
+
+    phoneEl?.addEventListener("blur", validatePhone);
+    phoneEl?.addEventListener("input", () => { validatePhone(); updateSubmitState(); });
+
+    experienceEl?.addEventListener("blur", validateExperience);
+    experienceEl?.addEventListener("change", () => { validateExperience(); updateSubmitState(); });
+
+    skillsEl?.addEventListener("blur", validateSkills);
+    skillsEl?.addEventListener("input", () => { validateSkills(); updateSubmitState(); });
+
+    resumeEl?.addEventListener("change", () => { validateResume(); updateSubmitState(); });
+
+    // ── Submit ───────────────────────────────────────────────────────────────
+
+    careerForm?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const ok = [
+        validateFirstName(),
+        validateEmail(),
+        validatePhone(),
+        validateExperience(),
+        validateSkills(),
+        validateResume(),
+      ].every(Boolean);
+
+      if (!ok) {
+        const firstError = document.querySelector(".border-red-400");
+        firstError?.focus();
+        return;
       }
 
-      careerForm.reset();
-      [firstNameEl, emailEl, phoneEl, skillsEl].forEach((el) => {
-        el?.classList.remove("border-green-400", "border-red-400");
-        el?.classList.add("border-gray-200");
-      });
-      [experienceEl, resumeEl].forEach((el) => {
-        el?.classList.remove("border-green-400", "border-red-400");
-        el?.classList.add("border-gray-200");
-      });
-
-      if (submitBtn) submitBtn.textContent = "Profile Submitted!";
-      if (statusEl) {
-        statusEl.textContent = "Thank you! We'll contact you when a matching drive comes up.";
-        statusEl.classList.replace("text-gray-500", "text-green-600");
+      if (submitBtn) {
+        submitBtn.textContent = "Submitting...";
+        submitBtn.disabled = true;
       }
 
-      setTimeout(() => {
+      try {
+        // Convert file to base64
+        const file = resumeEl.files[0];
+        const base64File = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result.split(",")[1]);
+          reader.onerror = () => reject(new Error("Failed to read file"));
+          reader.readAsDataURL(file);
+        });
+
+        const fd = new FormData(careerForm);
+        const data = Object.fromEntries(fd.entries());
+        delete data.resume; // remove file blob, send base64 instead
+
+        const res = await fetch(CAREER_SCRIPT_URL, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain" },
+          body: JSON.stringify({
+            ...data,
+            origin: window.location.origin,
+            resumeBase64: base64File,
+            resumeFileName: file.name,
+            resumeMimeType: file.type,
+          }),
+        });
+
+        const result = await res.json();
+
+        if (result.error) {
+          throw new Error(result.error);
+        }
+
+        careerForm.reset();
+        [firstNameEl, emailEl, phoneEl, skillsEl].forEach((el) => {
+          el?.classList.remove("border-green-400", "border-red-400");
+          el?.classList.add("border-gray-200");
+        });
+        [experienceEl, resumeEl].forEach((el) => {
+          el?.classList.remove("border-green-400", "border-red-400");
+          el?.classList.add("border-gray-200");
+        });
+
+        if (submitBtn) submitBtn.textContent = "Profile Submitted!";
+        if (statusEl) {
+          statusEl.textContent = "Thank you! We'll contact you when a matching drive comes up.";
+          statusEl.classList.replace("text-gray-500", "text-green-600");
+        }
+
+        setTimeout(() => {
+          if (submitBtn) {
+            submitBtn.textContent = "Submit My Profile";
+            submitBtn.disabled = true;
+          }
+          if (statusEl) {
+            statusEl.textContent = "We'll reach out when a matching opportunity comes up.";
+            statusEl.classList.replace("text-green-600", "text-gray-500");
+          }
+        }, 5000);
+
+      } catch (err) {
         if (submitBtn) {
-          submitBtn.textContent = "Submit My Profile";
-          submitBtn.disabled = true;
+          submitBtn.textContent = "Error — Try Again";
+          submitBtn.disabled = false;
         }
         if (statusEl) {
-          statusEl.textContent = "We'll reach out when a matching opportunity comes up.";
-          statusEl.classList.replace("text-green-600", "text-gray-500");
+          statusEl.textContent = err instanceof Error ? err.message : "Something went wrong. Please try again.";
+          statusEl.classList.replace("text-gray-500", "text-red-500");
         }
-      }, 5000);
+      }
+    });
 
-    } catch (err) {
-      if (submitBtn) {
-        submitBtn.textContent = "Error — Try Again";
-        submitBtn.disabled = false;
-      }
-      if (statusEl) {
-        statusEl.textContent = err instanceof Error ? err.message : "Something went wrong. Please try again.";
-        statusEl.classList.replace("text-gray-500", "text-red-500");
-      }
-    }
+    // ── Init ─────────────────────────────────────────────────────────────────
+
+    updateSubmitState();
   });
-
-  // ── Init ─────────────────────────────────────────────────────────────────
-
-  updateSubmitState();
 </script>

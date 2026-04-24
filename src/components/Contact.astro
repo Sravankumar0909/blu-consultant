@@ -159,176 +159,181 @@
 
 <script>
   // @ts-nocheck
-  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxeCRoXHs8AGTlASu-K3PCrHc4JK99KMqfZAuhUQSFZrpmpZ41lYyqAL8LecCCIiegxfw/exec";
 
-  // ── Element references ───────────────────────────────────────────────────
+  document.addEventListener('astro:page-load', () => {
+      // This ensures the script runs after Astro has hydrated the page and all elements are available in the DOM.
 
-  const form = /** @type {HTMLFormElement | null} */ (document.getElementById("contact-form"));
-  const firstNameEl = /** @type {HTMLInputElement | null} */ (document.getElementById("firstName"));
-  const emailEl = /** @type {HTMLInputElement | null} */ (document.getElementById("email"));
-  const companyEl = /** @type {HTMLInputElement | null} */ (document.getElementById("company"));
-  const submitBtn = /** @type {HTMLButtonElement | null} */ (document.getElementById("submit-btn"));
+    const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxeCRoXHs8AGTlASu-K3PCrHc4JK99KMqfZAuhUQSFZrpmpZ41lYyqAL8LecCCIiegxfw/exec";
 
-  // ── Helpers ──────────────────────────────────────────────────────────────
+    // ── Element references ───────────────────────────────────────────────────
 
-  /**
-   * @param {HTMLInputElement} inputEl
-   * @param {string} errorId
-   * @param {string} message
-   */
-  function setError(inputEl, errorId, message) {
-    const err = document.getElementById(errorId);
-    inputEl.classList.add("border-red-400");
-    inputEl.classList.remove("border-green-400", "border-gray-200");
-    if (err) {
-      err.textContent = message;
-      err.classList.remove("hidden");
-    }
-  }
+    const form = /** @type {HTMLFormElement | null} */ (document.getElementById("contact-form"));
+    const firstNameEl = /** @type {HTMLInputElement | null} */ (document.getElementById("firstName"));
+    const emailEl = /** @type {HTMLInputElement | null} */ (document.getElementById("email"));
+    const companyEl = /** @type {HTMLInputElement | null} */ (document.getElementById("company"));
+    const submitBtn = /** @type {HTMLButtonElement | null} */ (document.getElementById("submit-btn"));
 
-  /**
-   * @param {HTMLInputElement} inputEl
-   * @param {string} errorId
-   */
-  function clearError(inputEl, errorId) {
-    const err = document.getElementById(errorId);
-    inputEl.classList.remove("border-red-400");
-    inputEl.classList.add("border-green-400");
-    if (err) {
-      err.classList.add("hidden");
-    }
-  }
+    // ── Helpers ──────────────────────────────────────────────────────────────
 
-  // ── Submit button state ──────────────────────────────────────────────────
-
-  function updateSubmitState() {
-    if (!submitBtn) return;
-    const firstName = firstNameEl?.value.trim() ?? "";
-    const email = emailEl?.value.trim() ?? "";
-    const company = companyEl?.value.trim() ?? "";
-
-    const allFilled = firstName !== "" && EMAIL_RE.test(email) && company !== "";
-    submitBtn.disabled = !allFilled;
-  }
-
-  // ── Per-field validators ─────────────────────────────────────────────────
-
-  function validateFirstName() {
-    if (!firstNameEl) return false;
-    if (!firstNameEl.value.trim()) {
-      setError(firstNameEl, "firstName-error", "First name is required.");
-      return false;
-    }
-    clearError(firstNameEl, "firstName-error");
-    return true;
-  }
-
-  function validateEmail() {
-    if (!emailEl) return false;
-    const val = emailEl.value.trim();
-    if (!val) {
-      setError(emailEl, "email-error", "Work email is required.");
-      return false;
-    }
-    if (!EMAIL_RE.test(val)) {
-      setError(emailEl, "email-error", "Please enter a valid work email address.");
-      return false;
-    }
-    clearError(emailEl, "email-error");
-    return true;
-  }
-
-  function validateCompany() {
-    if (!companyEl) return false;
-    if (!companyEl.value.trim()) {
-      setError(companyEl, "company-error", "Company name is required.");
-      return false;
-    }
-    clearError(companyEl, "company-error");
-    return true;
-  }
-
-  // ── Blur + input listeners ───────────────────────────────────────────────
-
-  firstNameEl?.addEventListener("blur", validateFirstName);
-  firstNameEl?.addEventListener("input", () => {
-    validateFirstName();
-    updateSubmitState();
-  });
-
-  emailEl?.addEventListener("blur", validateEmail);
-  emailEl?.addEventListener("input", () => {
-    validateEmail();
-    updateSubmitState();
-  });
-
-  companyEl?.addEventListener("blur", validateCompany);
-  companyEl?.addEventListener("input", () => {
-    validateCompany();
-    updateSubmitState();
-  });
-
-  // ── Submit ───────────────────────────────────────────────────────────────
-
-  form?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const ok = [validateFirstName(), validateEmail(), validateCompany()].every(Boolean);
-    if (!ok) {
-      const firstError = /** @type {HTMLElement | null} */ (document.querySelector(".border-red-400"));
-      firstError?.focus();
-      return;
+    /**
+     * @param {HTMLInputElement} inputEl
+     * @param {string} errorId
+     * @param {string} message
+     */
+    function setError(inputEl, errorId, message) {
+      const err = document.getElementById(errorId);
+      inputEl.classList.add("border-red-400");
+      inputEl.classList.remove("border-green-400", "border-gray-200");
+      if (err) {
+        err.textContent = message;
+        err.classList.remove("hidden");
+      }
     }
 
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
-
-    if (submitBtn) {
-      submitBtn.textContent = "Sending...";
-      submitBtn.disabled = true;
+    /**
+     * @param {HTMLInputElement} inputEl
+     * @param {string} errorId
+     */
+    function clearError(inputEl, errorId) {
+      const err = document.getElementById(errorId);
+      inputEl.classList.remove("border-red-400");
+      inputEl.classList.add("border-green-400");
+      if (err) {
+        err.classList.add("hidden");
+      }
     }
 
-    try {
-      const res = await fetch(SCRIPT_URL, {
-        method: "POST",
-        headers: { "Content-Type": "text/plain" },
-        body: JSON.stringify({
-          ...data,
-          origin: window.location.origin,
-        }),
-      });
+    // ── Submit button state ──────────────────────────────────────────────────
 
-      const result = await res.json();
+    function updateSubmitState() {
+      if (!submitBtn) return;
+      const firstName = firstNameEl?.value.trim() ?? "";
+      const email = emailEl?.value.trim() ?? "";
+      const company = companyEl?.value.trim() ?? "";
 
-      if (result.error) {
-        throw new Error(result.error);
+      const allFilled = firstName !== "" && EMAIL_RE.test(email) && company !== "";
+      submitBtn.disabled = !allFilled;
+    }
+
+    // ── Per-field validators ─────────────────────────────────────────────────
+
+    function validateFirstName() {
+      if (!firstNameEl) return false;
+      if (!firstNameEl.value.trim()) {
+        setError(firstNameEl, "firstName-error", "First name is required.");
+        return false;
+      }
+      clearError(firstNameEl, "firstName-error");
+      return true;
+    }
+
+    function validateEmail() {
+      if (!emailEl) return false;
+      const val = emailEl.value.trim();
+      if (!val) {
+        setError(emailEl, "email-error", "Work email is required.");
+        return false;
+      }
+      if (!EMAIL_RE.test(val)) {
+        setError(emailEl, "email-error", "Please enter a valid work email address.");
+        return false;
+      }
+      clearError(emailEl, "email-error");
+      return true;
+    }
+
+    function validateCompany() {
+      if (!companyEl) return false;
+      if (!companyEl.value.trim()) {
+        setError(companyEl, "company-error", "Company name is required.");
+        return false;
+      }
+      clearError(companyEl, "company-error");
+      return true;
+    }
+
+    // ── Blur + input listeners ───────────────────────────────────────────────
+
+    firstNameEl?.addEventListener("blur", validateFirstName);
+    firstNameEl?.addEventListener("input", () => {
+      validateFirstName();
+      updateSubmitState();
+    });
+
+    emailEl?.addEventListener("blur", validateEmail);
+    emailEl?.addEventListener("input", () => {
+      validateEmail();
+      updateSubmitState();
+    });
+
+    companyEl?.addEventListener("blur", validateCompany);
+    companyEl?.addEventListener("input", () => {
+      validateCompany();
+      updateSubmitState();
+    });
+
+    // ── Submit ───────────────────────────────────────────────────────────────
+
+    form?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const ok = [validateFirstName(), validateEmail(), validateCompany()].every(Boolean);
+      if (!ok) {
+        const firstError = /** @type {HTMLElement | null} */ (document.querySelector(".border-red-400"));
+        firstError?.focus();
+        return;
       }
 
-      form.reset();
-      [firstNameEl, emailEl, companyEl].forEach((el) => {
-        el?.classList.remove("border-green-400", "border-red-400");
-        el?.classList.add("border-gray-200");
-      });
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
 
-      if (submitBtn) submitBtn.textContent = "Message Sent!";
-
-      setTimeout(() => {
-        if (submitBtn) {
-          submitBtn.textContent = "Send Message";
-          submitBtn.disabled = true;
-        }
-      }, 3000);
-
-    } catch (err) {
       if (submitBtn) {
-        submitBtn.textContent = "Error - Try Again";
-        submitBtn.disabled = false;
+        submitBtn.textContent = "Sending...";
+        submitBtn.disabled = true;
       }
-    }
+
+      try {
+        const res = await fetch(SCRIPT_URL, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain" },
+          body: JSON.stringify({
+            ...data,
+            origin: window.location.origin,
+          }),
+        });
+
+        const result = await res.json();
+
+        if (result.error) {
+          throw new Error(result.error);
+        }
+
+        form.reset();
+        [firstNameEl, emailEl, companyEl].forEach((el) => {
+          el?.classList.remove("border-green-400", "border-red-400");
+          el?.classList.add("border-gray-200");
+        });
+
+        if (submitBtn) submitBtn.textContent = "Message Sent!";
+
+        setTimeout(() => {
+          if (submitBtn) {
+            submitBtn.textContent = "Send Message";
+            submitBtn.disabled = true;
+          }
+        }, 3000);
+
+      } catch (err) {
+        if (submitBtn) {
+          submitBtn.textContent = "Error - Try Again";
+          submitBtn.disabled = false;
+        }
+      }
+    });
+
+    // ── Init ─────────────────────────────────────────────────────────────────
+
+    updateSubmitState();
   });
-
-  // ── Init ─────────────────────────────────────────────────────────────────
-
-  updateSubmitState();
 </script>
