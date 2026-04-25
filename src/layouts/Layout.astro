@@ -8,7 +8,7 @@ interface Props {
 
 const { title, description = 'Blu Consultant Services - Your trusted partner for all HR solutions. Manpower staffing, PoSH compliance, payroll, HR policy, training & insurance services across India.', type= 'website' } = Astro.props;
 
-const siteOrigin = Astro.site || import.meta.env.SITE || 'http://localhost:3000';
+const siteOrigin = Astro.site || import.meta.env.SITE || 'http://localhost:4321';
 const canonicalURL = new URL(Astro.url.pathname, siteOrigin);
 
 const jsonLd = {
@@ -47,14 +47,14 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 		<meta property="og:url" content={canonicalURL.href} />
 		<meta property="og:site_name" content="BluConsultantServices" />
 		<meta property="og:locale" content="en_IN" />
-		<meta property="og:image" content={new URL('/og-image.jpg', siteOrigin).href} />
+		<meta property="og:image" content={new URL('/og-image.png', canonicalURL).href} />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
 		<meta property="og:image:alt" content="BluConsultantServices - Your One-Stop HR Partner" />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
-		<meta name="twitter:image" content={new URL('/twitter-image.jpg', siteOrigin).href} />
+		<meta name="twitter:image" content={new URL('/og-image.png', canonicalURL).href} />
 		<meta name="twitter:image:alt" content="BluConsultantServices - Your One-Stop HR Partner" />
 		<link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
 		<link rel="icon" type="image/png" sizes="32x32" href={`${base}/favicon-32x32.png`} />
