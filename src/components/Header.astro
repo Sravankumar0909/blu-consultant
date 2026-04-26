@@ -24,10 +24,10 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
 ---
 
 <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
-  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16" aria-label="Main navigation" role="banner">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20" aria-label="Main navigation" role="banner">
     <!-- Logo -->
     <a href={base || '/'} aria-label="BLU Consultant Services Home" class="flex items-center gap-2 font-bold text-xl text-primary-700">
-      <Image src={bluLogo} alt="BLU Consultant Services" width={320} height={128} class="w-auto h-14 sm:h-16" loading="eager" fetchpriority="high" />
+      <Image src={bluLogo} alt="BLU Consultant Services" width={480} height={192} class="w-auto h-20 sm:h-24" loading="eager" fetchpriority="high" />
     </a>
 
     <!-- Desktop Nav -->
