@@ -102,6 +102,23 @@
             </p>
           </div>
           <div>
+            <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number <span class="text-red-500" aria-hidden="true">*</span></label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              autocomplete="tel"
+              required
+              aria-required="true"
+              aria-describedby="phone-error"
+              class="w-full px-4 py-2.5 rounded-lg border border-gray-200 text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition"
+              placeholder="+91 98765 43210"
+            />
+            <p id="phone-error" class="mt-1 text-xs text-red-500 hidden" role="alert">
+              Please enter a valid phone number.
+            </p>
+          </div>
+          <div>
             <label for="company" class="block text-sm font-medium text-gray-700 mb-1">Company Name <span class="text-red-500" aria-hidden="true">*</span></label>
             <input
               type="text"
@@ -164,13 +181,15 @@
       // This ensures the script runs after Astro has hydrated the page and all elements are available in the DOM.
 
     const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzc7hOZ8Qt6LaShQVsJVv6BY2tP7pOj7aZrYWHTyHgIruIrP9ie3WqDG3eaR76ca6f5/exec";
+    const PHONE_RE = /^[+]?[\d\s\-().]{7,15}$/;
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyIj60-MpoStSC5FGK-3pRl6bHpEv0jwhmbnCQ2r-JtXqNMVXj5kMQE72walI9hnmH4/exec";
 
     // ── Element references ───────────────────────────────────────────────────
 
     const form = /** @type {HTMLFormElement | null} */ (document.getElementById("contact-form"));
     const firstNameEl = /** @type {HTMLInputElement | null} */ (document.getElementById("firstName"));
     const emailEl = /** @type {HTMLInputElement | null} */ (document.getElementById("email"));
+    const phoneEl = /** @type {HTMLInputElement | null} */ (document.getElementById("phone"));
     const companyEl = /** @type {HTMLInputElement | null} */ (document.getElementById("company"));
     const submitBtn = /** @type {HTMLButtonElement | null} */ (document.getElementById("submit-btn"));
 
@@ -210,9 +229,10 @@
       if (!submitBtn) return;
       const firstName = firstNameEl?.value.trim() ?? "";
       const email = emailEl?.value.trim() ?? "";
+      const phone = phoneEl?.value.trim() ?? ""; 
       const company = companyEl?.value.trim() ?? "";
 
-      const allFilled = firstName !== "" && EMAIL_RE.test(email) && company !== "";
+      const allFilled = firstName !== "" && EMAIL_RE.test(email) && PHONE_RE.test(phone) && company !== "";
       submitBtn.disabled = !allFilled;
     }
 
@@ -243,6 +263,21 @@
       return true;
     }
 
+    function validatePhone() {
+      if (!phoneEl) return false;
+      const val = phoneEl.value.trim();
+      if (!val) {
+        setError(phoneEl, "phone-error", "Phone number is required.");
+        return false;
+      }
+      if (!PHONE_RE.test(val)) {
+        setError(phoneEl, "phone-error", "Please enter a valid phone number.");
+        return false;
+      }
+      clearError(phoneEl, "phone-error");
+      return true;
+    }
+
     function validateCompany() {
       if (!companyEl) return false;
       if (!companyEl.value.trim()) {
@@ -267,6 +302,12 @@
       updateSubmitState();
     });
 
+    phoneEl?.addEventListener("blur", validatePhone);
+    phoneEl?.addEventListener("input", () => {
+      validatePhone();
+      updateSubmitState();
+    });
+
     companyEl?.addEventListener("blur", validateCompany);
     companyEl?.addEventListener("input", () => {
       validateCompany();
@@ -278,7 +319,7 @@
     form?.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      const ok = [validateFirstName(), validateEmail(), validateCompany()].every(Boolean);
+      const ok = [validateFirstName(), validateEmail(), validatePhone(), validateCompany()].every(Boolean);
       if (!ok) {
         const firstError = /** @type {HTMLElement | null} */ (document.querySelector(".border-red-400"));
         firstError?.focus();
@@ -310,7 +351,7 @@
         }
 
         form.reset();
-        [firstNameEl, emailEl, companyEl].forEach((el) => {
+        [firstNameEl, emailEl, phoneEl, companyEl].forEach((el) => {
           el?.classList.remove("border-green-400", "border-red-400");
           el?.classList.add("border-gray-200");
         });
